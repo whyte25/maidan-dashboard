@@ -56,10 +56,8 @@ This repository contains the source code for the products dashboard technical as
 - **Type Safety:** Strict TypeScript implementation for reliability.
 - **Optimized UX:** Skeleton loaders, optimistic updates, and smooth transitions.
 
-## Screenshots
+## Screenshot
 
-_(Screenshots will be visible on the public repository)_
+![Dashboard Screenshot](public/dashboard-image.png)
 
 ---
-
-Developed as a technical assessment submission.
