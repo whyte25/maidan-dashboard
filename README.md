@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Maidan Dashboard
 
-## Getting Started
+A premium, responsive product management dashboard built with Next.js 16, TanStack Query, and Shadcn UI.
 
-First, run the development server:
+## 📦 Submission Overview
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+This repository contains the source code for the products dashboard technical assessment. The application features a robust product management interface with real-time updates, multi-image uploads, and a refined user experience.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Getting Started
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Prerequisites
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- [Bun](https://bun.sh) (Recommended) or Node.js 20+
 
-## Learn More
+### Setup Instructions
 
-To learn more about Next.js, take a look at the following resources:
+1. **Clone the repository:**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   ```bash
+   git clone https://github.com/whyte25/maidan-dashboard.git
+   cd maidan-dashboard
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2. **Install dependencies:**
 
-## Deploy on Vercel
+   ```bash
+   bun install
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3. **Run the development server:**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+   ```bash
+   bun dev
+   ```
+
+4. **Build for production:**
+   ```bash
+   bun run build
+   bun start
+   ```
+
+## 🛠️ Technical Decisions
+
+### Core Stack
+
+- **Framework:** **Next.js 16 (App Router)** for optimized performance and modern routing patterns.
+- **Styling:** **Tailwind CSS 4** with **Shadcn UI** for a high-end, consistent design system.
+- **State Management:**
+  - **Server State:** **TanStack Query** for efficient caching and synchronization.
+  - **Forms:** **React Hook Form** with **Zod** for type-safe validation.
+- **Components:** Headless UI patterns using **Radix UI** and **TanStack Table**.
+
+### Architecture
+
+- **Layered Architecture:** Clear separation between UI components, custom hooks, and API services.
+- **Type Safety:** Strict TypeScript implementation for reliability.
+- **Optimized UX:** Skeleton loaders, optimistic updates, and smooth transitions.
+
+## 📸 Screenshots
+
+_(Screenshots will be visible on the public repository)_
+
+---
+
+Developed as a technical assessment submission.
