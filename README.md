@@ -2,11 +2,11 @@
 
 A premium, responsive product management dashboard built with Next.js 16, TanStack Query, and Shadcn UI.
 
-## 📦 Submission Overview
+## Submission Overview
 
 This repository contains the source code for the products dashboard technical assessment. The application features a robust product management interface with real-time updates, multi-image uploads, and a refined user experience.
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -39,7 +39,7 @@ This repository contains the source code for the products dashboard technical as
    bun start
    ```
 
-## 🛠️ Technical Decisions
+## Technical Decisions
 
 ### Core Stack
 
@@ -56,7 +56,7 @@ This repository contains the source code for the products dashboard technical as
 - **Type Safety:** Strict TypeScript implementation for reliability.
 - **Optimized UX:** Skeleton loaders, optimistic updates, and smooth transitions.
 
-## 📸 Screenshots
+## Screenshots
 
 _(Screenshots will be visible on the public repository)_
 
