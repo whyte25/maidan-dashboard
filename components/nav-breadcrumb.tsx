@@ -46,7 +46,7 @@ export function NavBreadcrumb() {
 
           return (
             <React.Fragment key={href}>
-              <BreadcrumbSeparator className="hidden md:block" />
+              <BreadcrumbSeparator className="block" />
               <BreadcrumbItem>
                 {isLast ? (
                   <BreadcrumbPage>{formattedSegment}</BreadcrumbPage>

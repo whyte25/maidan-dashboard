@@ -18,7 +18,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
@@ -73,10 +72,9 @@ export function NavUser() {
               align="end"
               sideOffset={4}
             >
-              <DropdownMenuSeparator />
               <AlertDialogTrigger asChild>
-                <DropdownMenuItem className="text-destructive focus:text-destructive focus:bg-destructive/10  cursor-pointer">
-                  <LogOut className="mr-2 h-4 w-4 " />
+                <DropdownMenuItem className="text-destructive rounded-md focus:text-destructive focus:bg-destructive/10 cursor-pointer ">
+                  <LogOut className="h-4 w-4" />
                   Log out
                 </DropdownMenuItem>
               </AlertDialogTrigger>
