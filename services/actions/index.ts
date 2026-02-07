@@ -52,6 +52,16 @@ export const getProducts = async ({
   return response.data;
 };
 
+export const getProductsCount = async (
+  params: GetProductsParams = {},
+): Promise<number> => {
+  const { page, limit, ...countParams } = params;
+  const response = await instance.get(PRODUCTS_ENDPOINTS().PRODUCTS, {
+    params: countParams,
+  });
+  return response.data.length;
+};
+
 export const getProductById = async (id: string): Promise<ProductResponse> => {
   const response = await instance.get(PRODUCTS_ENDPOINTS(id).PRODUCTS);
 

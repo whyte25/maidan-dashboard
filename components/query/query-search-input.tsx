@@ -21,10 +21,12 @@ export const QuerySearchInput: React.FC<SearchInputProps> = ({
   width = "w-[300px]",
 }) => {
   const [urlState, setUrlState] = useQueryState(queryParamName);
+  const [, setPage] = useQueryState("page");
   const [inputValue, setInputValue] = useState(urlState || "");
 
   const handleSearch = () => {
     setUrlState(inputValue);
+    setPage(null);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -35,19 +37,21 @@ export const QuerySearchInput: React.FC<SearchInputProps> = ({
   const handleReset = () => {
     setInputValue("");
     setUrlState(null);
+    setPage(null);
   };
 
   React.useEffect(() => {
     if (!inputValue) {
       setUrlState(null);
+      setPage(null);
     }
-  }, [inputValue, setUrlState]);
+  }, [inputValue, setUrlState, setPage]);
 
   return (
     <form
       onSubmit={handleSubmit}
       className={cn(
-        `flex ${width} items-center focus-within:ring-2 focus-within:ring-gray-600  h-10 rounded-lg border bg-white border-neutral-200 p-[0.5px]  ${className}`
+        `flex ${width} items-center focus-within:ring-2 focus-within:ring-gray-600  h-10 rounded-lg border bg-white border-neutral-200 p-[0.5px]  ${className}`,
       )}
     >
       <Button
@@ -64,7 +68,7 @@ export const QuerySearchInput: React.FC<SearchInputProps> = ({
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           className={cn(
-            `w-full border-none bg-transparent px-0 outline-none placeholder:text-gray-500 font-medium placeholder:font-medium focus:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 ${inputClassName}`
+            `w-full border-none bg-transparent px-0 outline-none placeholder:text-gray-500 font-medium placeholder:font-medium focus:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 ${inputClassName}`,
           )}
         />
         {inputValue && (

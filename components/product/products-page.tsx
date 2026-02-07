@@ -14,20 +14,25 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { PRODUCT_CATEGORIES } from "@/constants/product";
-import { useGetProducts } from "@/hooks/queries";
-import { Loader2, Plus } from "lucide-react";
+import { useGetProducts, useGetProductsCount } from "@/hooks/queries";
+import { Plus } from "lucide-react";
 import Link from "next/link";
 import { parseAsInteger, parseAsString, useQueryState } from "nuqs";
 
 export default function ProductsPage() {
-  const [page] = useQueryState("page", parseAsInteger.withDefault(1));
+  const [page, setPage] = useQueryState("page", parseAsInteger.withDefault(1));
   const [limit] = useQueryState("limit", parseAsInteger.withDefault(10));
   const [search] = useQueryState("search", parseAsString.withDefault(""));
   const [category, setCategory] = useQueryState("category");
 
-  const { data, isLoading, error } = useGetProducts({
+  const { data, isLoading, error, refetch, isRefetching } = useGetProducts({
     page,
     limit,
+    search: search || undefined,
+    category: category || undefined,
+  });
+
+  const { data: totalItems = 0 } = useGetProductsCount({
     search: search || undefined,
     category: category || undefined,
   });
@@ -35,8 +40,8 @@ export default function ProductsPage() {
   const products = data || [];
   const pagination = {
     current_page: page,
-    total_pages: Math.ceil(products.length > 0 ? 100 / limit : 1),
-    total_items: products.length,
+    total_pages: Math.ceil(totalItems > 0 ? totalItems / limit : 1),
+    total_items: totalItems,
     items_per_page: limit,
   };
 
@@ -58,7 +63,10 @@ export default function ProductsPage() {
       <div className="flex flex-wrap items-center gap-4">
         <Select
           value={category || "all"}
-          onValueChange={(value) => setCategory(value === "all" ? null : value)}
+          onValueChange={(value) => {
+            setCategory(value === "all" ? null : value);
+            setPage(null);
+          }}
         >
           <SelectTrigger className="w-[140px]">
             <SelectValue placeholder="Category" />
@@ -87,10 +95,9 @@ export default function ProductsPage() {
           <EmptyState
             title="Failed to load products"
             description="We couldn't retrieve the products at this time. Please try again later."
-            icon={Loader2}
             action={{
-              label: "Retry",
-              onClick: () => window.location.reload(),
+              label: isRefetching ? "retrying..." : "Retry",
+              onClick: () => refetch(),
             }}
           />
         </div>

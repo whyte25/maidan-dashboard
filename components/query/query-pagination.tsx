@@ -41,14 +41,10 @@ export function QueryPagination({
 
   const handleLimitChange = async (newLimit: string) => {
     startTransition(async () => {
-      await Promise.all([
-        setLimit(parseInt(newLimit)),
-        setPage(1), // Reset to first page when changing items per page
-      ]);
+      await Promise.all([setLimit(parseInt(newLimit)), setPage(1)]);
     });
   };
 
-  // Generate array of page numbers to display
   const getPageNumbers = () => {
     const pageNumbers = [];
     const maxPagesToShow = 5;
@@ -62,7 +58,7 @@ export function QueryPagination({
         for (let i = 1; i <= 4; i++) {
           pageNumbers.push(i);
         }
-        pageNumbers.push(-1); // Represents ellipsis
+        pageNumbers.push(-1);
         pageNumbers.push(total_pages);
       } else if (current_page >= total_pages - 2) {
         pageNumbers.push(1);
