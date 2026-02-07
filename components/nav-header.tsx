@@ -4,15 +4,24 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  useSidebar,
 } from "@/components/ui/sidebar";
 import { AudioWaveform } from "lucide-react";
 import Link from "next/link";
 
 export function NavHeader() {
+  const { isMobile, toggleSidebar } = useSidebar();
+
+  const handleItemClick = () => {
+    if (isMobile) {
+      toggleSidebar();
+    }
+  };
   return (
     <SidebarMenu>
       <SidebarMenuItem>
         <SidebarMenuButton
+          onClick={handleItemClick}
           asChild
           size="lg"
           className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
