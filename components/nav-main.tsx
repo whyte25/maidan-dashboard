@@ -16,6 +16,7 @@ import {
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
+  useSidebar,
 } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utils";
 import { Route } from "next";
@@ -41,6 +42,13 @@ export function NavMain({
   }[];
 }) {
   const pathname = usePathname();
+  const { isMobile, toggleSidebar } = useSidebar();
+
+  const handleItemClick = () => {
+    if (isMobile) {
+      toggleSidebar();
+    }
+  };
 
   return (
     <SidebarGroup>
@@ -75,6 +83,7 @@ export function NavMain({
                       <SidebarMenuSubItem key={subItem.title}>
                         <SidebarMenuSubButton
                           asChild
+                          onClick={handleItemClick}
                           isActive={pathname === subItem.url}
                           className={cn(
                             "",
