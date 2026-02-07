@@ -6,6 +6,7 @@ import * as React from "react";
 import { useDropzone, type DropzoneOptions } from "react-dropzone";
 
 import { cn } from "@/lib/utils";
+import { Button } from "./ui/button";
 
 export const formatFileSize = (bytes: number) => {
   if (typeof bytes !== "number") return "0 B";
@@ -194,13 +195,9 @@ const MultiImageDropzone = React.forwardRef<HTMLInputElement, InputProps>(
             </div>
             <div className="text-xs text-gray-500 dark:text-gray-400">or</div>
 
-            <button
-              type="button"
-              disabled={disabled}
-              className="rounded-full bg-gray-800 px-4 py-1.5 text-sm font-medium text-white dark:bg-gray-200 dark:text-gray-800"
-            >
+            <Button type="button" disabled={disabled}>
               Browse
-            </button>
+            </Button>
 
             <div className="text-xs text-gray-500 dark:text-gray-400">
               {dropzoneOptions?.maxFiles &&
@@ -212,14 +209,14 @@ const MultiImageDropzone = React.forwardRef<HTMLInputElement, InputProps>(
         </div>
 
         {displayMode === "grid" ? (
-          <div className="grid grid-cols-6 gap-4 lg:gap-1 lg:grid-cols-6 ">
+          <div className="grid grid-cols-6 gap-2 lg:gap-1 lg:grid-cols-6 ">
             {/* Images */}
             {value?.map(({ file, progress }, index) => (
               <div
                 key={index}
                 className={dropzoneVariants({ variant: "image" })}
               >
-                <div className="h-full w-full flex-shrink-0 overflow-hidden rounded-md bg-gray-100 dark:bg-gray-700">
+                <div className="h-full w-full shrink-0 overflow-hidden rounded-md bg-gray-100 dark:bg-gray-700">
                   <img
                     src={imageUrls[index]}
                     alt={typeof file === "string" ? "product image" : file.name}

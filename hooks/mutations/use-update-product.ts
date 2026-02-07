@@ -21,6 +21,7 @@ export function useUpdateProduct() {
     mutationFn: ({ id, data }: UpdateProductParams) =>
       updateProduct(id, data as ProductFormValues),
     onSuccess: (_, { redirectTo = "/dashboard/products" }) => {
+      router.refresh();
       toast.success("Product updated successfully");
       queryClient.invalidateQueries({ queryKey: [QUERY_KEY.PRODUCTS] });
       if (redirectTo !== "none") {

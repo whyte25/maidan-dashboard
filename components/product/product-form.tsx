@@ -120,20 +120,11 @@ export function ProductForm({ defaultValues, productId }: ProductFormProps) {
     error: uploadError,
   } = useMultipleFileUpload({
     onSuccess: (images) => {
-      setFileStates((prev) => {
-        const newFileStates = [...prev];
-        images.forEach((img) => {
-          const index = newFileStates.findIndex((f) => f.key === img.key);
-          if (index !== -1) {
-            newFileStates[index] = {
-              ...newFileStates[index],
-              file: img.url,
-              progress: "COMPLETE",
-            };
-          }
-        });
-        return newFileStates;
-      });
+      setValue(
+        "images",
+        images.map((image) => image.url),
+        { shouldValidate: true },
+      );
     },
     onError: (error) => {
       toast.error("Upload failed", { description: error });
@@ -241,7 +232,6 @@ export function ProductForm({ defaultValues, productId }: ProductFormProps) {
     >
       <Accordion
         type="multiple"
-        className="gap-4"
         defaultValue={["details", "properties", "price"]}
       >
         {/* Details Section */}
@@ -267,6 +257,7 @@ export function ProductForm({ defaultValues, productId }: ProductFormProps) {
               <FieldLabel>Sub Description</FieldLabel>
               <Textarea
                 {...register("subDescription")}
+                className="h-24"
                 placeholder="Enter a short description"
                 rows={4}
               />
@@ -311,18 +302,19 @@ export function ProductForm({ defaultValues, productId }: ProductFormProps) {
                   setFileStates([...fileStates, ...addedFiles]);
                 }}
               />
-              <Button
-                type="button"
-                variant="outline"
-                className="mt-2"
-                onClick={handleUploadImages}
-                disabled={
-                  isUploading ||
-                  !fileStates.filter((f) => f.progress === "PENDING").length
-                }
-              >
-                {isUploading ? "Uploading..." : "Upload Images"}
-              </Button>
+              {fileStates.length > 0 && (
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={handleUploadImages}
+                  disabled={
+                    isUploading ||
+                    !fileStates.filter((f) => f.progress === "PENDING").length
+                  }
+                >
+                  {isUploading ? "Uploading..." : "Upload Images"}
+                </Button>
+              )}
               {uploadError && (
                 <div className="mt-2 text-sm text-red-500">{uploadError}</div>
               )}
@@ -392,7 +384,7 @@ export function ProductForm({ defaultValues, productId }: ProductFormProps) {
                       "flex items-center gap-2 rounded-full border px-3 py-1.5 text-sm transition-colors",
                       selectedColors.includes(color.value)
                         ? "border-primary bg-primary/10"
-                        : "border-muted hover:border-primary/50",
+                        : "border-gray-200 hover:border-primary/50",
                     )}
                   >
                     <span
@@ -423,10 +415,10 @@ export function ProductForm({ defaultValues, productId }: ProductFormProps) {
                       toggleArrayValue("sizes", size, selectedSizes)
                     }
                     className={cn(
-                      "rounded-md border px-3 py-1.5 text-sm transition-colors",
+                      "rounded-full border  px-3 py-1.5 text-sm transition-colors",
                       selectedSizes.includes(size)
                         ? "border-primary bg-primary text-primary-foreground"
-                        : "border-muted hover:border-primary/50",
+                        : "border-gray-200 hover:border-primary/50",
                     )}
                   >
                     {size}

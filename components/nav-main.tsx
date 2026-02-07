@@ -17,6 +17,7 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
+import { cn } from "@/lib/utils";
 import { Route } from "next";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -75,6 +76,11 @@ export function NavMain({
                         <SidebarMenuSubButton
                           asChild
                           isActive={pathname === subItem.url}
+                          className={cn(
+                            "",
+                            pathname === subItem.url &&
+                              "bg-primary! text-primary-foreground!",
+                          )}
                         >
                           <Link href={subItem.url as Route}>
                             <span>{subItem.title}</span>

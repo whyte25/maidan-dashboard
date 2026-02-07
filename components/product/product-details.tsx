@@ -38,7 +38,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
   const handleUpdateStatus = (isPublished: boolean) => {
     updateProductMutation.mutate({
       id: product.id,
-      data: { isPublished } as any,
+      data: { isPublished },
       redirectTo: "none",
     });
   };
@@ -60,7 +60,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
           Back
         </Button>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1">
           <Button variant="ghost" size="icon" asChild>
             <Link href={`/dashboard/products/${product.id}/edit`}>
               <Edit className="h-4 w-4" />
@@ -127,7 +127,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
             </div>
           </div>
 
-          <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
+          <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
             {product.images.map((img, idx) => (
               <button
                 key={idx}
