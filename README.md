@@ -12,7 +12,7 @@ This repository contains the source code for the products dashboard technical as
 
 ### Prerequisites
 
-- [Bun](https://bun.sh) (Recommended) or Node.js 20+
+- [Bun](https://bun.sh) or Node.js 20+
 
 ### Setup Instructions
 
