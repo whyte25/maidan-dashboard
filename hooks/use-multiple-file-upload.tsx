@@ -40,7 +40,6 @@ export function useMultipleFileUpload({
 
   useEffect(() => {
     return () => {
-      // Cleanup URLs when component unmounts
       imageUrlsRef.current.forEach((url) => {
         if (url.startsWith("blob:")) {
           URL.revokeObjectURL(url);
@@ -112,8 +111,6 @@ export function useMultipleFileUpload({
               throw new Error("Upload response did not contain a secure_url.");
             }
 
-            await new Promise((resolve) => setTimeout(resolve, 1000)); // Optional delay
-
             setUploadProgress((prev) =>
               prev.map((item) =>
                 item.key === key
@@ -140,9 +137,6 @@ export function useMultipleFileUpload({
           } catch (err: any) {
             overallErrorOccurred = true;
             if (axios.isCancel(err)) {
-              console.log(
-                `[useMultipleFileUpload] DEBUG: Upload cancelled for file: ${file.name}`,
-              );
               setUploadProgress((prev) =>
                 prev.map((item) =>
                   item.key === key
@@ -153,11 +147,6 @@ export function useMultipleFileUpload({
             } else {
               const errorMessage =
                 err.response?.data?.message || err.message || "Upload failed";
-              console.error(
-                `[useMultipleFileUpload] DEBUG: Error uploading file ${file.name} (key: ${key}):`,
-                errorMessage,
-                err,
-              );
               setUploadProgress((prev) =>
                 prev.map((item) =>
                   item.key === key
@@ -200,27 +189,16 @@ export function useMultipleFileUpload({
       ) {
         // This case: files were attempted, no errors were explicitly caught that set overallErrorOccurred to true, but no files succeeded.
         // This could be due to cancellations not throwing other errors, or other silent failures.
-        console.log(
-          "[useMultipleFileUpload] DEBUG: No successful uploads, and no specific errors caught during upload process that triggered overallErrorOccurred. Check for cancellations or silent failures.",
-        );
-        // Optionally call onError here if this state is considered an error for the consumer
         // if (onError) onError("Upload process completed without any successful uploads.");
       }
     } catch (err) {
       const finalErrorMessage =
         "An unexpected error occurred during the multiple file upload process.";
-      console.error(
-        "[useMultipleFileUpload] DEBUG: Overall error in uploadMultipleFiles:",
-        err,
-      );
       setError(finalErrorMessage);
       if (onError) {
         onError(finalErrorMessage);
       }
     } finally {
-      console.log(
-        "[useMultipleFileUpload] DEBUG: setIsUploading(false) in finally block.",
-      );
       setIsUploading(false);
     }
   };

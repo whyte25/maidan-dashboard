@@ -139,7 +139,6 @@ const MultiImageDropzone = React.forwardRef<HTMLInputElement, InputProps>(
       }
     };
 
-    // dropzone configuration
     const {
       getRootProps,
       getInputProps,
@@ -154,7 +153,6 @@ const MultiImageDropzone = React.forwardRef<HTMLInputElement, InputProps>(
       ...dropzoneOptions,
     });
 
-    // Update the variant logic
     const variant = React.useMemo(() => {
       if (disabled) return "disabled";
       if (isDragReject) return "reject";
@@ -163,7 +161,6 @@ const MultiImageDropzone = React.forwardRef<HTMLInputElement, InputProps>(
       return "base";
     }, [isFocused, isDragAccept, isDragReject, disabled]);
 
-    // error validation messages
     const errorMessage = React.useMemo(() => {
       if (fileRejections[0]) {
         const { errors } = fileRejections[0];
@@ -210,7 +207,6 @@ const MultiImageDropzone = React.forwardRef<HTMLInputElement, InputProps>(
 
         {displayMode === "grid" ? (
           <div className="grid grid-cols-6 gap-2 lg:gap-1 lg:grid-cols-6 ">
-            {/* Images */}
             {value?.map(({ file, progress }, index) => (
               <div
                 key={index}
@@ -223,13 +219,11 @@ const MultiImageDropzone = React.forwardRef<HTMLInputElement, InputProps>(
                     className="m-0 h-full w-full object-cover"
                   />
                 </div>
-                {/* Progress Bar */}
                 {typeof progress === "number" && (
                   <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center rounded-md bg-black bg-opacity-70">
                     <CircleProgress progress={progress} />
                   </div>
                 )}
-                {/* Remove Image Icon */}
                 {imageUrls[index] &&
                   !disabled &&
                   (progress === "PENDING" || progress === "COMPLETE") && (
@@ -270,7 +264,6 @@ const MultiImageDropzone = React.forwardRef<HTMLInputElement, InputProps>(
                 className="group relative flex items-center justify-between rounded-lg bg-zinc-900/5 p-3 transition-colors hover:bg-zinc-900/10 dark:bg-white/5 dark:hover:bg-white/10"
               >
                 <div className="flex min-w-0 flex-1 items-center gap-3">
-                  {/* Success Check Icon */}
                   {progress === "COMPLETE" && (
                     <CheckCircle className="h-5 w-5 flex-shrink-0 text-green-500" />
                   )}

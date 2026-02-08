@@ -88,10 +88,9 @@ export function ProductForm({ defaultValues, productId }: ProductFormProps) {
   const isEditMode = Boolean(productId);
 
   const [fileStates, setFileStates] = React.useState<FileState[]>([]);
-  console.log(defaultValues);
+
   const [tagsOpen, setTagsOpen] = React.useState(false);
 
-  // Mutations
   const createProductMutation = useCreateProduct();
   const updateProductMutation = useUpdateProduct();
 
@@ -132,7 +131,6 @@ export function ProductForm({ defaultValues, productId }: ProductFormProps) {
   });
 
   const formValues = getValues();
-  console.log(formValues);
 
   const priceIncludesTax = watch("priceIncludesTax");
   const selectedColors = watch("colors");
@@ -151,7 +149,6 @@ export function ProductForm({ defaultValues, productId }: ProductFormProps) {
     }
   }, [defaultValues?.images]);
 
-  // Update file progress based on upload progress
   React.useEffect(() => {
     if (uploadProgress.length) {
       setFileStates((fileStates) => {
@@ -169,7 +166,6 @@ export function ProductForm({ defaultValues, productId }: ProductFormProps) {
     }
   }, [uploadProgress]);
 
-  // Sync completed uploads with form
   React.useEffect(() => {
     const completedUrls = fileStates
       .filter((f) => f.progress === "COMPLETE" && typeof f.file === "string")
@@ -234,7 +230,6 @@ export function ProductForm({ defaultValues, productId }: ProductFormProps) {
         type="multiple"
         defaultValue={["details", "properties", "price"]}
       >
-        {/* Details Section */}
         <AccordionItem value="details">
           <AccordionTrigger>
             <div className="flex flex-col items-start">
@@ -245,14 +240,12 @@ export function ProductForm({ defaultValues, productId }: ProductFormProps) {
             </div>
           </AccordionTrigger>
           <AccordionContent className="space-y-4 h-full">
-            {/* Name */}
             <Field>
               <FieldLabel>Product Name</FieldLabel>
               <Input {...register("name")} placeholder="Enter product name" />
               {errors.name && <FieldError>{errors.name.message}</FieldError>}
             </Field>
 
-            {/* Sub Description */}
             <Field>
               <FieldLabel>Sub Description</FieldLabel>
               <Textarea
@@ -266,7 +259,6 @@ export function ProductForm({ defaultValues, productId }: ProductFormProps) {
               )}
             </Field>
 
-            {/* Content */}
             <Field className="relative">
               <FieldLabel>Content</FieldLabel>
               <Controller
@@ -285,7 +277,6 @@ export function ProductForm({ defaultValues, productId }: ProductFormProps) {
               )}
             </Field>
 
-            {/* Images */}
             <Field>
               <FieldLabel>Images (minimum 2)</FieldLabel>
               <MultiImageDropzone
@@ -325,7 +316,6 @@ export function ProductForm({ defaultValues, productId }: ProductFormProps) {
           </AccordionContent>
         </AccordionItem>
 
-        {/* Properties Section */}
         <AccordionItem value="properties">
           <AccordionTrigger>
             <div className="flex flex-col items-start">
@@ -336,7 +326,6 @@ export function ProductForm({ defaultValues, productId }: ProductFormProps) {
             </div>
           </AccordionTrigger>
           <AccordionContent className="space-y-4 h-full">
-            {/* Product Code & SKU */}
             <div className="grid gap-4 sm:grid-cols-2">
               <Field>
                 <FieldLabel>Product Code</FieldLabel>
@@ -356,7 +345,6 @@ export function ProductForm({ defaultValues, productId }: ProductFormProps) {
               </Field>
             </div>
 
-            {/* Quantity */}
             <Field>
               <FieldLabel>Quantity</FieldLabel>
               <Input
@@ -369,7 +357,6 @@ export function ProductForm({ defaultValues, productId }: ProductFormProps) {
               )}
             </Field>
 
-            {/* Colors */}
             <Field>
               <FieldLabel>Colors</FieldLabel>
               <div className="flex flex-wrap gap-2">
@@ -403,7 +390,6 @@ export function ProductForm({ defaultValues, productId }: ProductFormProps) {
               )}
             </Field>
 
-            {/* Sizes */}
             <Field>
               <FieldLabel>Sizes</FieldLabel>
               <div className="flex flex-wrap gap-2">
@@ -428,7 +414,6 @@ export function ProductForm({ defaultValues, productId }: ProductFormProps) {
               {errors.sizes && <FieldError>{errors.sizes.message}</FieldError>}
             </Field>
 
-            {/* Category */}
             <Field>
               <FieldLabel>Category</FieldLabel>
               <Controller
@@ -454,7 +439,6 @@ export function ProductForm({ defaultValues, productId }: ProductFormProps) {
               )}
             </Field>
 
-            {/* Tags */}
             <Field>
               <FieldLabel>Tags</FieldLabel>
               <Tags open={tagsOpen} onOpenChange={setTagsOpen}>
@@ -492,7 +476,6 @@ export function ProductForm({ defaultValues, productId }: ProductFormProps) {
               {errors.tags && <FieldError>{errors.tags.message}</FieldError>}
             </Field>
 
-            {/* Gender */}
             <Field>
               <FieldLabel>Gender</FieldLabel>
               <div className="flex flex-wrap gap-4">
@@ -520,7 +503,6 @@ export function ProductForm({ defaultValues, productId }: ProductFormProps) {
               )}
             </Field>
 
-            {/* isNew & isOnSale */}
             <div className="flex flex-wrap gap-6">
               <Field orientation="horizontal">
                 <FieldLabel>New Product</FieldLabel>
@@ -553,7 +535,6 @@ export function ProductForm({ defaultValues, productId }: ProductFormProps) {
           </AccordionContent>
         </AccordionItem>
 
-        {/* Price Section */}
         <AccordionItem value="price">
           <AccordionTrigger>
             <div className="flex flex-col items-start">
@@ -564,7 +545,6 @@ export function ProductForm({ defaultValues, productId }: ProductFormProps) {
             </div>
           </AccordionTrigger>
           <AccordionContent className="space-y-4 h-full">
-            {/* Regular Price */}
             <Field>
               <FieldLabel>Regular Price</FieldLabel>
               <Input
@@ -578,7 +558,6 @@ export function ProductForm({ defaultValues, productId }: ProductFormProps) {
               )}
             </Field>
 
-            {/* Sale Price */}
             <Field>
               <FieldLabel>Sale Price (optional)</FieldLabel>
               <Input
@@ -592,7 +571,6 @@ export function ProductForm({ defaultValues, productId }: ProductFormProps) {
               )}
             </Field>
 
-            {/* Price Includes Tax */}
             <Field orientation="horizontal">
               <FieldLabel>Price Includes Tax</FieldLabel>
               <Controller
@@ -607,7 +585,6 @@ export function ProductForm({ defaultValues, productId }: ProductFormProps) {
               />
             </Field>
 
-            {/* Tax Percentage (conditional) */}
             {priceIncludesTax && (
               <Field>
                 <FieldLabel>Tax Percentage</FieldLabel>
@@ -626,7 +603,6 @@ export function ProductForm({ defaultValues, productId }: ProductFormProps) {
         </AccordionItem>
       </Accordion>
 
-      {/* Submit Button */}
       <div className="flex items-center justify-between gap-4">
         <Field orientation="horizontal" className="mb-0 w-fit">
           <FieldLabel className="mb-0">Publish</FieldLabel>
