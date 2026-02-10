@@ -8,6 +8,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { Route } from "next";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
@@ -26,7 +27,7 @@ export function NavBreadcrumb() {
             <BreadcrumbPage>Dashboard</BreadcrumbPage>
           ) : (
             <BreadcrumbLink asChild>
-              <Link href={"/dashboard" as any}>Dashboard</Link>
+              <Link href={"/dashboard"}>Dashboard</Link>
             </BreadcrumbLink>
           )}
         </BreadcrumbItem>
@@ -48,7 +49,7 @@ export function NavBreadcrumb() {
                   <BreadcrumbPage>{formattedSegment}</BreadcrumbPage>
                 ) : (
                   <BreadcrumbLink asChild>
-                    <Link href={href as any}>{formattedSegment}</Link>
+                    <Link href={href as Route}>{formattedSegment}</Link>
                   </BreadcrumbLink>
                 )}
               </BreadcrumbItem>

@@ -9,6 +9,7 @@ import {
   EmptyTitle,
 } from "./empty";
 
+import { Route } from "next";
 import Link from "next/link";
 
 interface EmptyStateProps {
@@ -45,7 +46,7 @@ export function EmptyState({
         <EmptyContent>
           {action.href ? (
             <Button asChild>
-              <Link href={action.href as any}>{action.label}</Link>
+              <Link href={action.href as Route}>{action.label}</Link>
             </Button>
           ) : (
             <Button onClick={action.onClick}>{action.label}</Button>

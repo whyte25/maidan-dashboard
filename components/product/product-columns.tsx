@@ -165,7 +165,7 @@ export const ProductsColumns: ColumnDef<ProductResponse>[] = [
         e.stopPropagation();
         updateProductMutation.mutate({
           id: product.id,
-          data: { isPublished: !isPublished } as any,
+          data: { isPublished: !isPublished },
           redirectTo: "none",
         });
       };

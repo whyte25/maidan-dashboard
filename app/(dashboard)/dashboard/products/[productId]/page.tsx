@@ -31,7 +31,7 @@ export async function generateStaticParams() {
 
     const productList = products;
 
-    return productList.map((product: any) => ({
+    return productList.map((product) => ({
       productId: product.id,
     }));
   } catch (error) {

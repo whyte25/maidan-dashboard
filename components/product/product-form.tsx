@@ -209,7 +209,7 @@ export function ProductForm({ defaultValues, productId }: ProductFormProps) {
     const newValues = currentValues.includes(value)
       ? currentValues.filter((v) => v !== value)
       : [...currentValues, value];
-    setValue(field, newValues as any, { shouldValidate: true });
+    setValue(field, newValues, { shouldValidate: true });
   };
 
   const toggleTag = (tag: string) => {
@@ -485,7 +485,7 @@ export function ProductForm({ defaultValues, productId }: ProductFormProps) {
                     className="flex cursor-pointer items-center gap-2"
                   >
                     <Checkbox
-                      checked={selectedGenders.includes(gender.value as any)}
+                      checked={selectedGenders.includes(gender.value)}
                       onCheckedChange={() =>
                         toggleArrayValue(
                           "gender",
